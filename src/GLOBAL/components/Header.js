@@ -401,6 +401,11 @@
         label: "Support",
         icon: <ProfileSupportIcon className="profile-item-icon"/>,
       },      
+      {
+        key: "Logout",
+        label: "Logout",
+        icon: <LogoutIcon className="profile-logout-icon"/>,
+      },
     ]
 
     const [isVisible, setIsVisible] = useState(true);
@@ -451,7 +456,7 @@
             ))}
           </nav>
           <div className="right-content">
-            <div className="sign-in-up-btns">
+            {/* <div className="sign-in-up-btns">
               <Link to="/login" className="log-in">
                 <div>
                   <p className="log-in-text">Log in</p>
@@ -463,7 +468,99 @@
                 </div>
               </Link>
             </div>
-            
+             */}
+             <div className="notification-search-profile">
+             <Button 
+              className="notification-icon" 
+              svg={<NotificationIcon className={`notification-svg ${showNotificationDropdown && "selected"}`} />} 
+              action={showNotificationHandler} page="/" />
+               {showNotificationDropdown && <div className="notification-dropdown"
+              >
+                <h4 className="notification-dropdown-header">
+                  Notifications
+                </h4>
+                <div className="mark-as-read"><img src={doubleCheck} className="mark-as-read-img" /><p>Mark as Read</p></div>
+                {notifications.length > 0 ? <><div className="notification-content-wrapper">
+                  <h5 className="notification-period-header">Today</h5>
+                  {notifications.map((notification) => (
+                    <div key={notification.id} className="notification-detail">
+                      <span className="notification-detail-img">{notification.icon}</span>
+                      <div className="notification-detail-text">
+                        <h6 className="notification-detail-header">{notification.title}</h6>
+                        <p className="notification-detail-body">{notification.body}</p>
+                        <Link to={notification.linkUrl} className="notification-detail-link">{notification.linkText}</Link>
+                      </div>
+                      <div className="notification-status-time">
+                        <p className="notification-time">{notification.time}</p>
+                        {notification.isUnread && <span className="notification-status unread"></span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="view-all-notifications">
+                  <a className="van-text">View All Notification</a>
+                </div></> :<div className="no-notifications-wrapper">
+                  <img className="no-notifications-img" src={noNotifications} />
+                  <p className="no-notifications-text">No Notifications</p>
+                </div>}
+                
+                
+              </div>}
+              <Button className="search-icon" icon={searchIcon} action={showSearchHandler} />
+              {showSearchDropdown && <div className="search-dropdown"
+              >
+
+                <div className="search-filter-wrapper">
+                  <div className="search-wrapper">
+                    <WrapperSearch className="wrapper-search"/>
+                    < TextInput className="header-search-textinput"/>
+                    <img src={searchMic} className="search-mic"/>
+                  </div>
+                <div className="filter-wrapper">
+                  <img className="search-filter-img" src={searchFilter} />
+                  </div>
+                  </div>
+                  {results.length > 0 ? <><div className="search-results-wrapper">
+                
+                {results.map((result) => (
+                  <div className="search-result">
+                    <h6 className="search-result-header">{result.header}</h6>
+                    <div className="search-result-detail">
+                    <img className="search-result-img" src={result.resultImg}/>
+                    <p className="search-result-title">{result.resultTitle}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="view-all-results">
+                <a className="var-text">View all Search Results</a>
+              </div></> : <div className="no-search-results">
+                  {/* <img src={noStream} /> */}<NoStream className="no-stream-img" />
+                  <p className="no-stream-text">We are sorry ,we cannot find the streaming
+                    content you are looking for</p>
+                </div>}
+                
+                
+              </div>}
+              <div className="profile-wrapper" onClick={showProfileHandler}>
+                  <img className="profile-img" src={headerProfilePlaceholder}/>
+                  {/* <img className="profile-chevron"/> */}
+                  <ProfileChevron/>
+              </div>
+              {showProfileDropdown && <div className="profile-dropdown">
+                <div className="profile-img-text-wrapper"><img className="profile-img" src={headerProfilePlaceholder}/>
+                  <h4 className="profile-text">Veeda</h4>
+                  </div>
+                  <div className="profile-items-wrapper">
+                    {profileItems.map(({label, icon}) => 
+                 <Link to={`/profile?tab=${encodeURIComponent(label)}`} className="profile-item">{icon}
+                 <p className="profile-item-label">{label}</p>
+               </Link>)}
+                  </div>
+                  {/* <Link><LogoutIcon className="profile-logout-icon"/>
+                  <p className="profile-item-label">Logout</p></Link> */}
+                  </div>}
+             </div>
           </div>
           {!showDrawer && <Button icon={hamburgerIcon} className="hamburger-icon" action={_toggleDrawer} />}
 
