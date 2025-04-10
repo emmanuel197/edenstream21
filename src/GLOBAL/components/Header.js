@@ -512,13 +512,13 @@
 
                 <div className="search-filter-wrapper">
                   <div className="search-wrapper">
-                    <WrapperSearch className="wrapper-search"/>
-                    < TextInput className="header-search-textinput"/>
-                    <img src={searchMic} className="search-mic"/>
+                    
+                    <TextInput icon={<WrapperSearch className="wrapper-search"/>} className="header-search-textinput"/>
+                    {/* <img src={searchMic} className="search-mic"/> */}
                   </div>
-                <div className="filter-wrapper">
+                <Link to="/search" className="filter-wrapper">
                   <img className="search-filter-img" src={searchFilter} />
-                  </div>
+                  </Link>
                   </div>
                   {results.length > 0 ? <><div className="search-results-wrapper">
                 
